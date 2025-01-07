@@ -20,21 +20,20 @@ public class GameFactory {
                 if (!areWarCardsValid(initialCards)) {
                     throw new IllegalArgumentException("ERROR: Not enough cards for War");
                 }
-                deck = new DeckWar(initialCards, 26);
+                deck = DeckFactory.createWarDeck(initialCards);
                 break;
             case "Belote":
                 if (!areBeloteCardsValid(initialCards)) {
                     throw new IllegalArgumentException("ERROR: Not enough cards for Belote");
                 }
-                deck = new DeckBelote(initialCards.subList(0, 32), 8);
+                deck = DeckFactory.createBeloteDeck(initialCards);
                 break;
             case "Santase":
                 if (!areSantaseCardsValid(initialCards)) {
                     throw new IllegalArgumentException("ERROR: Not enough cards for Santase");
                 }
-                deck = new DeckSantase(initialCards.subList(0, 24), 6);
+                deck = DeckFactory.createSantaseDeck(initialCards);
                 break;
-
             case "quit":
                 return null;
             default:
@@ -53,6 +52,8 @@ public class GameFactory {
 
         return game;
     }
+
+
     ///Tezi implementacii sa po-tupiq case kogato se preglejda celiqt
     ///podaden list ot karti a ne samo purvite 24, 32 ili 52.
     ///poneje razbrah che trqbvalo da se proverqvat samo purvite 24, 32 ili 52
