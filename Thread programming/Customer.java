@@ -1,19 +1,28 @@
 import java.util.Random;
 
-public class Customer implements Runnable {
-    private final TicketBookingSystem system;
+public class Customer implements Runnable, Comparable<Customer> {
+    private final TicketBookingSystem bookingSystem;
     private final String customerName;
     private final int ticketsRequested;
+    private static final Random random = new Random();
 
-    public Customer(TicketBookingSystem system, String customerName) {
-        this.system = system;
+    public Customer(TicketBookingSystem bookingSystem, String customerName) {
+        this.bookingSystem = bookingSystem;
         this.customerName = customerName;
-        this.ticketsRequested = new Random().nextInt(5) + 1;
+        this.ticketsRequested = random.nextInt(5) + 1; // Requests between 1-5 tickets
     }
 
     @Override
     public void run() {
-        system.bookTicket(customerName, ticketsRequested);
+        bookingSystem.bookTicket(customerName, ticketsRequested);
+    }
+
+    public int getTicketsRequested() {
+        return ticketsRequested;
+    }
+
+    @Override
+    public int compareTo(Customer other) {
+        return Integer.compare(this.ticketsRequested, other.ticketsRequested);
     }
 }
-

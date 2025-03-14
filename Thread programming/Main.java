@@ -1,22 +1,23 @@
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.PriorityQueue;
+
 public class Main {
     public static void main(String[] args) {
         int totalTickets = 10;
         TicketBookingSystem bookingSystem = new TicketBookingSystem(totalTickets);
 
-        Thread[] customers = new Thread[6]; // Example: 6 customers
+        PriorityQueue<Customer> customerQueue = new PriorityQueue<>();
 
-        for (int i = 0; i < customers.length; i++) {
-            customers[i] = new Thread(new Customer(bookingSystem, "Customer-" + (i + 1)));
-            customers[i].start();
+        for (int i = 0; i < 6; i++) {
+            customerQueue.add(new Customer(bookingSystem, "Customer-" + (i + 1)));
         }
 
-        // Wait for all threads to finish
-        for (Thread customer : customers) {
+        while (!customerQueue.isEmpty()) {
+            Thread customerThread = new Thread(customerQueue.poll());
+            customerThread.start();
+
             try {
-                customer.join();
+                customerThread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
