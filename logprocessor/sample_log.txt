@@ -1,0 +1,4 @@
+2023-10-26 10:00:00.123 INFO com.example.ClassA Message A
+2023-10-26 10:00:01.456 ERROR com.example.ClassB Message B
+2023-10-26 10:00:02.789 DEBUG com.example.ClassC Message C
+2023-10-26 10:00:03.012 INFO com.example.ClassD Message D
